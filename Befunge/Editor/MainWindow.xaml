@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Befunge Editor" Height="350" Width="525">
     <Grid>
-        
+        <loc:CodeTextBox x:Name="EditRegion" Margin="10,10,10,10.5" Text="Hello, world!"/>
     </Grid>
 </Window>

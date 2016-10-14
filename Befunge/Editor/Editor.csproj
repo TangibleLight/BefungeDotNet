@@ -63,8 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CharStyles\ICharStyler.cs" />
+    <Compile Include="CharStyles\BefungeStyler.cs" />
+    <Compile Include="CharStyles\ITextStyler.cs" />
     <Compile Include="Controls\CodeTextBox.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

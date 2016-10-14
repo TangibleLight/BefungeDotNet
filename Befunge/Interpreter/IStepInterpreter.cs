@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Befunge.Interpreter
 {
-    public interface StepInterpreter : INotifyPropertyChanged
+    public interface IStepInterpreter : INotifyPropertyChanged
     {
         IVec2 InstructionPointerPosition { get; }
         string Output { get; }

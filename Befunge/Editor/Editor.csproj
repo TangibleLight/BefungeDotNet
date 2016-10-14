@@ -66,6 +66,7 @@
     <Compile Include="CharStyles\BefungeStyler.cs" />
     <Compile Include="CharStyles\ITextStyler.cs" />
     <Compile Include="Controls\CodeTextBox.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utils\Extensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

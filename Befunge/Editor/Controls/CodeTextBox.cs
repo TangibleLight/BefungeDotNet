@@ -1,14 +1,19 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Data.SqlTypes;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Markup;
 using System.Windows.Media;
 using Befunge.Editor.CharStyles;
 using Befunge.Editor.Utils;
 
 namespace Befunge.Editor.Controls
 {
+    [ContentProperty("TextStyler")]
     public class CodeTextBox : RichTextBox
     {
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
@@ -47,11 +52,11 @@ namespace Befunge.Editor.Controls
             Resources.Add(typeof(Paragraph), s);
 
             FontFamily = new FontFamily("Consolas");
-        }
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
 
-        protected override void OnTextChanged(TextChangedEventArgs e)
-        {
-            UpdateColors();
+            Loaded += (sender, e) => UpdateColors();
+            TextChanged += (sender, e) => UpdateColors();
         }
 
         public void UpdateColors()
@@ -84,6 +89,9 @@ namespace Befunge.Editor.Controls
             p.AppendStylizedText(TextStyler, afterText);
 
             _changingColors = false;
+
+            var m = (allText.Split('\n').Select(x => x.Length).Max() + 2)*Document.FontSize*1126/2048;
+            Document.PageWidth = m;
         }
     }
 }

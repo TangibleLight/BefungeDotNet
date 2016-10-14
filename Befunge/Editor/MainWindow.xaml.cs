@@ -34,9 +34,6 @@ namespace Befunge.Editor
         public MainWindow()
         {
             InitializeComponent();
-
-            EditRegion.TextStyler = new BefungeStyler();
-            EditRegion.UpdateColors();
         }
     }
 }

@@ -1,22 +1,70 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:loc="clr-namespace:Befunge.Editor.Controls"
-        xmlns:local="clr-namespace:Befunge.Editor" x:Class="Befunge.Editor.MainWindow"
-        mc:Ignorable="d"
-        Title="Befunge Editor" Height="350" Width="525">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:loc="clr-namespace:Befunge.Editor.Controls"
+    xmlns:local="clr-namespace:Befunge.Editor"
+    xmlns:charStyles="clr-namespace:Befunge.Editor.CharStyles"
+    x:Class="Befunge.Editor.MainWindow"
+    mc:Ignorable="d"
+    Title="Befunge Editor" Height="350" Width="525">
+
+    <Window.Resources>
+        <Brush x:Key="LightBg">#333333</Brush>
+        <Brush x:Key="LightFg">#eeeeff</Brush>
+        <Brush x:Key="DarkBg">#222222</Brush>
+        <Brush x:Key="DarkFg">#aaaabb</Brush>
+
+        <charStyles:TextStyle x:Key="CompIfDir" Foreground="CornflowerBlue" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="OpStackOp" Foreground="IndianRed" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="IoSource" Foreground="SeaGreen" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="Ip" Foreground="DarkGoldenrod" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="Literal" Foreground="{StaticResource DarkFg}" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="Tramp" Foreground="Plum" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="End" Foreground="OrangeRed" FontWeight="Bold" />
+        <charStyles:TextStyle x:Key="Default" Foreground="{StaticResource LightFg}" FontWeight="Normal" />
+    </Window.Resources>
+
+    <Window.Foreground>
+        <StaticResource ResourceKey="LightFg" />
+    </Window.Foreground>
+
+    <Window.Background>
+        <StaticResource ResourceKey="LightBg" />
+    </Window.Background>
+
     <Window.DataContext>
-        <local:TextContext/>
+        <local:TextContext Text="&quot;!dlrow ,olleH&quot;>:#,_@" />
     </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        
-        <loc:CodeTextBox x:Name="EditRegion" Margin="10" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
-        <TextBox x:Name="PlainTextBox" Margin="10" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+
+        <loc:CodeTextBox x:Name="EditRegion" Margin="10" Grid.Row="0" Background="{StaticResource DarkBg}"
+                         Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <loc:CodeTextBox.TextStyler>
+                <charStyles:BefungeStyler
+                    CompareStyle="{StaticResource CompIfDir}"
+                    IfStyle="{StaticResource CompIfDir}"
+                    DirectionalStyle="{StaticResource CompIfDir}"
+                    OperatorStyle="{StaticResource OpStackOp}"
+                    StackOpStyle="{StaticResource OpStackOp}"
+                    IoStyle="{StaticResource IoSource}"
+                    SourceModStyle="{StaticResource IoSource}"
+                    IpStyle="{StaticResource Ip}"
+                    LiteralStyle="{StaticResource Literal}"
+                    TrampStyle="{StaticResource Tramp}"
+                    EndStyle="{StaticResource End}"
+                    DefaultStyle="{StaticResource Default}" />
+            </loc:CodeTextBox.TextStyler>
+        </loc:CodeTextBox>
+
+        <TextBox x:Name="PlainTextBox" Margin="10" Grid.Row="1" FontFamily="Consolas" AcceptsReturn="True"
+                 Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Foreground="{StaticResource DarkFg}" Background="{StaticResource DarkBg}" />
     </Grid>
 </Window>

@@ -8,6 +8,6 @@ namespace Befunge.Editor.CharStyles
 {
     public interface ITextStyler
     {
-        IEnumerable<Run> StyledString(string input);
+        IEnumerable<Run> StylizedString(string input);
     }
 }
